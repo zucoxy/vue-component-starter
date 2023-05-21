@@ -1,0 +1,42 @@
+{
+  "name": "my-component",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "require": "./dist/components/index.js",
+      "import": "./dist/components/index.mjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "vitest dev",
+    "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
+    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+    "prepack": "pnpm run build",
+    "release": "bumpp --commit --push --tag && npm publish",
+    "test": "pnpm lint && vitest run --coverage"
+  },
+  "devDependencies": {
+    "changelogen": "^0.5.3",
+    "typescript": "^4.9.5",
+    "unbuild": "^1.2.1"
+  },
+  "packageManager": "pnpm@7.32.2"
+}
